@@ -18,7 +18,7 @@
       "webRequest"
     ],
     "host_permissions": [
-      "*://*.aidungeon.com/adventure/"
+      "*://*.aidungeon.com/*"
     ],  
     "icons": {
       "16": "images/icon-16.png",
@@ -31,14 +31,14 @@
     },
     "externally_connectable": {
       "matches": [
-        "https://*.aidungeon.com/adventure/*"
+        "*://*.aidungeon.com/*"
       ]
     },
     "content_scripts": [
       {
         "js": ["scripts/content.js"],
         "matches": [
-          "https://*.aidungeon.com/adventure/*"
+          "*://*.aidungeon.com/*"
         ],
         "run_at":"document_start"
       }
