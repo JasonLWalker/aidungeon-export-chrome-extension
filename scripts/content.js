@@ -33,7 +33,9 @@ chrome.runtime.onMessage.addListener(
 
         console.log(request['data']);
         const card = request['data'];
-        const str = JSON.stringify(card);
+        const str = Array.from(new TextEncoder('utf-8').encode(JSON.stringify(card)), (byte) =>
+          String.fromCodePoint(byte),
+        ).join("");
         var elemLink = document.createElement('a');
         elemLink.id = 'gglChromeExtensionAidsExport';
         elemLink.innerText = 'Test';
