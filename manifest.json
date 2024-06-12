@@ -1,0 +1,51 @@
+{
+    "manifest_version": 3,
+    "name": "AI Dungeon Export",
+    "description": "An extension to enable exporting an AI Dungeon adventure as a V2 Character Card or JSON file.",
+    "version": "0.0.1",
+    "action": {
+      "default_icon": {
+        "16": "images/icon-16.png",
+        "32": "images/icon-32.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+      }
+    },
+    "permissions": [
+      "activeTab", 
+      "tabs", 
+      "scripting", 
+      "webRequest"
+    ],
+    "host_permissions": [
+      "*://*.aidungeon.com/adventure/"
+    ],  
+    "icons": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "background": {
+      "service_worker": "scripts/background.js"
+    },
+    "externally_connectable": {
+      "matches": [
+        "https://*.aidungeon.com/adventure/*"
+      ]
+    },
+    "content_scripts": [
+      {
+        "js": ["scripts/content.js"],
+        "matches": [
+          "https://*.aidungeon.com/adventure/*"
+        ],
+        "run_at":"document_start"
+      }
+    ],
+    "web_accessible_resources": [{
+      "resources": ["scripts/fetchIntercept.js"],
+      "matches": ["<all_urls>"]
+    }]
+  
+  }
