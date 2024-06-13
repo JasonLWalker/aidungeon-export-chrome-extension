@@ -46,12 +46,6 @@ chrome.runtime.onMessage.addListener(
         console.log(elemLink);
         await elemLink.click();
         elemLink.remove();
-        
-        // Retrieve link element
-        //let elem = document.querySelector('#gglChromeExtensionAidsExport');
-        // Trigger download
-        //if (elem)
-        //  elem.click();
       }
     } catch (ex) {
       log("An exception has occurred", ex);

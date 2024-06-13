@@ -6,8 +6,9 @@ window.fetch = new Proxy(window.fetch, {
             let bIntercept = false;
             if ((args[0] || "").match(/^https?:\/\/.*\.aidungeon\.com\/graphql/i))
             {
-                if ( args[1] && args[1]['headers'] && (args[1].headers['x-gql-operation-name'] || '').match(/^GetGameplayAdventure$/i) ) 
+                if ( args[1] && args[1]['headers'] && (args[1].headers['x-gql-operation-name'] || '').match(/^(?:GetGameplayAdventure|GetScenario|ScenarioStartViewGetScenario)$/i) ) 
                 {
+                    //console.log(args[1]['body']);
                     let body = JSON.parse(args[1]['body']);
                     if (body && body['variables'] && !body.variables['offset'] ){
                         bIntercept = true;
@@ -19,8 +20,9 @@ window.fetch = new Proxy(window.fetch, {
                 let response = await result;
                 var peek = response.clone();
                 let bodyObj = await peek.json();
-                if(bodyObj && bodyObj['data'] && bodyObj.data['adventure']) {
-                    let jsonObj = bodyObj.data.adventure;
+                console.log(bodyObj);
+                if(bodyObj && bodyObj['data'] && (bodyObj.data['adventure'] || bodyObj.data['scenario'])) {
+                    let jsonObj = bodyObj.data['adventure'] || bodyObj.data['scenario'];
                     window.postMessage({action: "gglChromeExtensionExport_cardready", data: jsonObj},"*");
                 }
             }

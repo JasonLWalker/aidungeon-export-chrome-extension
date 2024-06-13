@@ -87,7 +87,7 @@ function buildCard(sourceObj) {
   if (!sourceObj)
     return null;
 
-  //console.log(sourceObj);
+  console.log(sourceObj);
   let card = getV2CardTemplate();
   var data = card.data;
 
